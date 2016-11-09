@@ -12,10 +12,8 @@ app.use( (req, res, next)=> {
 });
 
 app.get('/',(req,res)=>{
-	var str = req.query.fullname;
-	str = str.toLowerCase();
-	var arr = str.split(' ');
-	arr = arr.filter(el=>el);
+	var str = req.query.fullname.toLowerCase();
+	var arr = str.split(' ').filter(el=>el);
 	arr.forEach((e,i,a)=>{a[i]=e[0].toUpperCase()+e.slice(1)});
 	if(arr.length >3 || req.query.fullname=="" || !(/^[^\d_\\\/]+$/.test(str))) res.end('Invalid fullname');
 	if(arr.length == 1) res.end(arr[arr.length-1]);

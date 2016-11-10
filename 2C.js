@@ -15,7 +15,6 @@ app.use( (req, res, next)=> {
 });
 
 app.get('/',(req,res)=>{
-	console.log(req.query.username)
 	var str = req.query.username;
 	if(reg1.test(str)) res.end(`@${str.match(reg1)[5]}`)
 	if(reg2.test(str)) res.end(`@${str}`)

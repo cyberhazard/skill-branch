@@ -27,9 +27,7 @@ app.listen(port,host,() => {
 });
 
 function volumes(arr){
-	var out = arr.reduce((rez,{volume,size})=>
-		(rez[volume] = !rez[volume]? size : rez[volume]+size , rez )
-	,{});
+	var out = arr.reduce((rez,{volume,size})=>(rez[volume] = !rez[volume]? size : rez[volume]+size , rez ),{});
 	Object.keys(out).forEach(el=>out[el]+='B')
 	return out
 }

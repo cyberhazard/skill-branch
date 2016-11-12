@@ -15,12 +15,9 @@ app.use( (req, res, next) => {
   next();
 });
 
-app.get('/volumes', (rew,res) => {
-	res.send(volumes(pc.hdd))
-});
-
 app.get('/:par0?/:par1?/:par2?/:par3?/:par4?',(req,res) => {
 	if(!req.params.par0) res.json(pc)
+	if(req.params.par0 == 'volumes') res.send(volumes(pc.hdd))
 	var paramsArr = Object.keys(req.params).filter(el=>!!req.params[el]).map(el=>req.params[el].toLowerCase().trim());
 	res.json(getByParams(pc,paramsArr,res));
 });

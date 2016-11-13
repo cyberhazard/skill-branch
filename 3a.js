@@ -27,17 +27,20 @@ app.listen(port,host,() => {
 });
 
 function volumes(arr){
-	var out = arr.reduce((rez,{volume,size})=>(rez[volume] = !rez[volume]? size : rez[volume]+size , rez ),{});
+	var out = arr.reduce((rez,{volume,size})=>
+		(rez[volume] = !rez[volume]? size : rez[volume]+size , rez )
+	,{});
 	Object.keys(out).forEach(el=>out[el]+='B')
 	return out
 }
 
 function getByParams(obj,params,res){
 	var out = obj[params[0]];
-	if(typeof out == 'undefined') return res.status(404).send('Not found')
+	if(typeof out == 'undefined') return res.status(404).send('Not Found')
 	for(var i = 1 ; i< params.length ; i++){
+		if(out.__proto__[params[i]] != undefined) res.status(404).send('Not Found')
 		out = out[params[i]]
-		if(typeof out == 'undefined') return res.status(404).send('Not found')
+		if(typeof out == 'undefined') return res.status(404).send('Not Found')
 	}
 	return out
 }
